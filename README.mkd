@@ -61,6 +61,12 @@ from the specified branch of your repository on GitHub, and then forks a process
 that runs the deployment. The web interface redirects to a page showing the
 deployment status and a live-updating view of the deployment log.
 
+## Contributors
+
+* Mat Brown &lt;mat@patch.com&gt;
+
+Feel free to contact me with questions.
+
 
 ## This is free software
 
