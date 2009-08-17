@@ -1,4 +1,4 @@
-= Clickistrano
+# Clickistrano
 
 Clickistrano is a simple Sinatra app for performing Capistrano deployments
 using a simple web interface. Clickistrano might be useful for you if:
@@ -8,7 +8,7 @@ using a simple web interface. Clickistrano might be useful for you if:
 * You use eycap for deployments (i.e., capistrano with multiple environments).
 * You use Github for source control hosting.
 
-== Installation and Configuration
+## Installation and Configuration
 
 Clickistrano isn't currently published as a gem, since I see little advantage in
 doing so. Just pick a good directory for the server, and check it out:
@@ -27,7 +27,7 @@ It requires the following keys:
 <dd>environment</dd>
 <dt>The environment you want to deploy to (i.e., cap &lt;environment&gt; deploy)</dt>
 
-== How it works
+## How it works
 
 When you access the front page (by default, localhost:4567 - see the Sinatra
 docs for how to change that), you are presented with a simple form asking for
@@ -38,7 +38,7 @@ that runs the deployment. The web interface redirects to a page showing the
 deployment status and a live-updating view of the deployment log.
 
 
-== This is free software
+## This is free software
 
 This software is released in the public domain, and may be distributed and
 modified with no restrictions. The author relinquishes all copyright on this
