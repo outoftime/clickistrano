@@ -21,11 +21,11 @@ $(function() {
 				break;
 			case 'FAILED':
 				status_message = 'Failed';
-				status_class = 'failed';
+				status_class = 'error';
 				break;
 			case 'ERROR':
 				status_message = 'Error';
-				status_class = 'failed';
+				status_class = 'error';
 				break;
 			}
 			$status.removeClass();
