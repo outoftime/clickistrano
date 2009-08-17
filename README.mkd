@@ -41,7 +41,7 @@ directory:
 
 There is also a sample init script in `example/clickistrano.sh`
 
-## Requirements (all available on RubyForge)
+## Dependencies (all available on RubyForge)
 
 * capistrano
 * escape
