@@ -1,0 +1,53 @@
+= Clickistrano
+
+Clickistrano is a simple Sinatra app for performing Capistrano deployments
+using a simple web interface. Clickistrano might be useful for you if:
+
+* You have members of your team who need to run deployments, but don't keep a
+  copy of your source checked out (e.g. product managers, QA engineers).
+* You use eycap for deployments (i.e., capistrano with multiple environments).
+* You use Github for source control hosting.
+
+== Installation and Configuration
+
+Clickistrano isn't currently published as a gem, since I see little advantage in
+doing so. Just pick a good directory for the server, and check it out:
+
+    $ git clone http://github.com/outoftime/clickistrano.git
+
+Clickistrano is configured with a <code>config.yml</code> file in the root directory.
+It requires the following keys:
+
+<dd>account</dd>
+<dt>The github account that hosts your repository</dt>
+<dd>repository</dd>
+<dt>The name of the repository on github</dt>
+<dd>token</dd>
+<dt>Your github API token. Go to the 'account' screen on GitHub to get this</dt>
+<dd>environment</dd>
+<dt>The environment you want to deploy to (i.e., cap &lt;environment&gt; deploy)</dt>
+
+== How it works
+
+When you access the front page (by default, localhost:4567 - see the Sinatra
+docs for how to change that), you are presented with a simple form asking for
+the git branch to deploy from. When the form is submitted, Clickistrano
+downloads the <code>Capfile</code> and <code>config/deploy.rb</code> files
+from the specified branch of your repository on GitHub, and then forks a process
+that runs the deployment. The web interface redirects to a page showing the
+deployment status and a live-updating view of the deployment log.
+
+
+== This is free software
+
+This software is released in the public domain, and may be distributed and
+modified with no restrictions. The author relinquishes all copyright on this
+software to the maximum extent permitted by law.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
