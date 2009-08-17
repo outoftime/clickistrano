@@ -1,6 +1,6 @@
 require 'escape'
 require 'fileutils'
-require 'open3'
+require 'open4'
 
 class DeployRunner
   InProgressError = Class.new(StandardError)
@@ -17,7 +17,7 @@ class DeployRunner
     begin
       FileUtils.cd(File.join(APP_ROOT, 'caproot')) do
         FileUtils.rm(log_path) if File.exist?(log_path)
-        Open3.popen3(Escape.shell_command([@config['cap'], environment, 'deploy'])) do |stdin, stdout, stderr|
+        status = Open4.popen4(Escape.shell_command([@config['cap'], environment, 'deploy'])) do |pid, stdin, stdout, stderr|
           until stderr.eof?
             data = stderr.readline
             File.open(log_path, 'a') do |file|
@@ -25,9 +25,12 @@ class DeployRunner
             end
           end
         end
-        if $? == 0
+        if status == 0
           set_status('DONE')
         else
+          File.open(log_path, 'a') do |file|
+            file.puts("#{@config['cap']} exited with status #{status}")
+          end
           set_status('FAILED')
         end
       end

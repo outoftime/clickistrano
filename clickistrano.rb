@@ -39,22 +39,23 @@ end
 
 get '/status' do
   log_path = File.join(APP_ROOT, 'state', 'deploy.out')
-  if File.exist?(log_path)
+  position = 0
+  log = if File.exist?(log_path)
     File.open(log_path) do |file|
       if start = params[:start]
         file.seek(start.to_i, IO::SEEK_SET)
       end
-      log = CGI.escapeHTML(file.read).gsub("\n", '<br>')
-      status = IO.read(File.join(APP_ROOT, 'state', 'status'))
       position = file.pos
-      content_type('application/json')
-      {
-        :log => log,
-        :status => status,
-        :position => position
-      }.to_json
+      CGI.escapeHTML(file.read).gsub("\n", '<br>')
     end
   else
     ''
   end
+  status = IO.read(File.join(APP_ROOT, 'state', 'status'))
+  content_type('application/json')
+  {
+    :log => log,
+    :status => status,
+    :position => position
+  }.to_json
 end
