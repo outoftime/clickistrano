@@ -18,14 +18,14 @@ doing so. Just pick a good directory for the server, and check it out:
 Clickistrano is configured with a <code>config.yml</code> file in the root directory.
 It requires the following keys:
 
-<dd>account</dd>
-<dt>The github account that hosts your repository</dt>
-<dd>repository</dd>
-<dt>The name of the repository on github</dt>
-<dd>token</dd>
-<dt>Your github API token. Go to the 'account' screen on GitHub to get this</dt>
-<dd>environment</dd>
-<dt>The environment you want to deploy to (i.e., cap &lt;environment&gt; deploy)</dt>
+<dt>account</dt>
+<dd>The github account that hosts your repository</dd>
+<dt>repository</dt>
+<dd>The name of the repository on github</dd>
+<dt>token</dt>
+<dd>Your github API token. Go to the 'account' screen on GitHub to get this</dd>
+<dt>environment</dt>
+<dd>The environment you want to deploy to (i.e., cap &lt;environment&gt; deploy)</dd>
 
 ## How it works
 
