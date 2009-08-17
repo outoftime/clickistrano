@@ -1,0 +1,13 @@
+!!! XML
+!!!
+%html
+  %head
+    %title Auto-Deployer
+  %body
+    %h1 Time to deploy!
+    %form{ :action => '/deploy', :method => 'POST' }
+      %div
+        Branch to deploy (e.g. 'v25'):
+        %input{ :id => 'branch', :name => 'branch', :value => @branch }
+      %div
+        %input{ :type => 'submit', :value => 'Start Deploy' }

@@ -1,0 +1,54 @@
+body {
+    font-family: Helvetica, Arial;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+h1, h2 {
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#status.in_progress {
+    color:orange;
+}
+
+#status.error {
+    color: red;
+}
+
+#status.success { 
+    color: green;
+}
+
+#progress {
+	font-family: monospace;
+	font-size: .8em;
+	width: 640px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid gray;
+	overflow: auto;
+}
+
+#log {
+	overflow:visible;
+}
+
+form div {
+    text-align: center;
+    font-size: 2em;
+    margin: 2em 0;
+}
+
+form div input {
+    font-size: 1.5em;
+}
+
+form div input#branch {
+    width: 3em;
+}
