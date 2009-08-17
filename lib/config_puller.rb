@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class ConfigPuller
   ConfigRequestError = Class.new(StandardError)
 
@@ -13,7 +15,9 @@ class ConfigPuller
       puts request_path
       response = http.get(request_path)
       if response.code == '200'
-        File.open("caproot/#{path}", 'w') { |f| f << response.body }
+        file_path = "caproot/#{path}"
+        FileUtils.mkdir_p(File.dirname(file_path))
+        File.open(file_path, 'w') { |f| f << response.body }
       else
         raise ConfigRequestError, "Got response code #{response.code} when requesting #{request_path}"
       end
