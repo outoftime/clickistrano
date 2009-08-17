@@ -17,7 +17,7 @@ class DeployRunner
     begin
       FileUtils.cd(File.join(APP_ROOT, 'caproot')) do
         FileUtils.rm(log_path) if File.exist?(log_path)
-        Open3.popen3(Escape.shell_command(['cap', environment, 'deploy'])) do |stdin, stdout, stderr|
+        Open3.popen3(Escape.shell_command([@config['cap'], environment, 'deploy'])) do |stdin, stdout, stderr|
           until stderr.eof?
             data = stderr.readline
             File.open(log_path, 'a') do |file|
@@ -25,11 +25,11 @@ class DeployRunner
             end
           end
         end
-      end
-      if $? == 0
-        set_status('DONE')
-      else
-        set_status('FAILED')
+        if $? == 0
+          set_status('DONE')
+        else
+          set_status('FAILED')
+        end
       end
     rescue => e
       set_status('ERROR')

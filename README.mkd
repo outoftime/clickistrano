@@ -26,6 +26,8 @@ It requires the following keys:
 <dd>Your github API token. Go to the 'account' screen on GitHub to get this</dd>
 <dt>environment</dt>
 <dd>The environment you want to deploy to (i.e., cap &lt;environment&gt; deploy)</dd>
+<dt>cap</dt>
+<dd>Path to the cap executable on your system</dd>
 
 If you're running this on a new machine, you will need to add the machine's SSH
 public key to your EngineYard account.
@@ -37,7 +39,7 @@ directory:
 
     $ thin start -R config.ru -d
 
-There is also a sample init file in `example/clickistrano.sh`
+There is also a sample init script in `example/clickistrano.sh`
 
 ## Requirements
 
