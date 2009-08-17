@@ -45,8 +45,9 @@ get '/status' do
       if start = params[:start]
         file.seek(start.to_i, IO::SEEK_SET)
       end
+      chunk = file.read
       position = file.pos
-      CGI.escapeHTML(file.read).gsub("\n", '<br>')
+      CGI.escapeHTML(chunk).gsub("\n", '<br>')
     end
   else
     ''
