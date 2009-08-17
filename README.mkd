@@ -41,11 +41,12 @@ directory:
 
 There is also a sample init script in `example/clickistrano.sh`
 
-## Requirements
+## Requirements (all available on RubyForge)
 
 * capistrano
 * escape
 * json
+* open4
 * rack
 * sinatra
 * thin

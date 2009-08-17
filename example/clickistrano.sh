@@ -11,13 +11,13 @@ case "$1" in
   start)
     echo -n "Starting clickistrano"
     cd $CLICKISTRANO_ROOT
-    $GEMS_BIN/thin start -R config.ru -d -u $USER -g $USER -p $PORT -P $PIDFILE
+    $GEMS_BIN/thin start -R config.ru -d -u $USER -g $GROUP -p $PORT -P $PIDFILE
     echo "."
     ;;
   stop)
     echo -n "Stopping clickistrano"
     cd $CLICKISTRANO_ROOT
-    $GEMS_BIN/thin stop -P $PIDFILE
+    $GEMS_BIN/thin stop -u $USER -g $GROUP -P $PIDFILE
     rm $PIDFILE
     echo "."
     ;;
