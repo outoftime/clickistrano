@@ -6,7 +6,7 @@ using a simple web interface. Clickistrano might be useful for you if:
 * You have members of your team who need to run deployments, but don't keep a
   copy of your source checked out (e.g. product managers, QA engineers).
 * You deploy using environment tasks (e.g. `cap qa deploy`)
-* You use Github for source control hosting.
+* You use Github or your own private server for source control hosting.
 
 ## Installation and Configuration
 
@@ -18,19 +18,22 @@ doing so. Just pick a good directory for the server, and check it out:
 Clickistrano is configured with a `config.yml` file in the root directory.
 It requires the following keys:
 
+<dt>adapter</dt>
+<dd>Either "github" or "local"</dd>
 <dt>account</dt>
-<dd>The github account that hosts your repository</dd>
+<dd>The github account that hosts your repository (GitHub adapter only)</dd>
 <dt>repository</dt>
-<dd>The name of the repository on github</dd>
+<dd>The name of the repository on github, or the path to the local git repo</dd>
 <dt>token</dt>
-<dd>Your github API token. Go to the 'account' screen on GitHub to get this</dd>
+<dd>Your github API token. Go to the 'account' screen on GitHub to get this
+(GitHub adapter only)</dd>
 <dt>environment</dt>
 <dd>The environment you want to deploy to (i.e., cap &lt;environment&gt; deploy)</dd>
 <dt>cap</dt>
 <dd>Path to the cap executable on your system</dd>
 
 If you're running this on a new machine, you will need to add the machine's SSH
-public key to your EngineYard account.
+public key to your deployment environment.
 
 ## Running it
 
@@ -41,7 +44,7 @@ directory:
 
 There is also a sample init script in `example/clickistrano.sh`
 
-## Dependencies (all available on RubyForge)
+## Dependencies (all available on Gemcutter)
 
 * capistrano
 * escape
@@ -50,6 +53,7 @@ There is also a sample init script in `example/clickistrano.sh`
 * rack
 * sinatra
 * thin
+* grit (local adapter only)
 
 ## How it works
 

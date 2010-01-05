@@ -24,7 +24,7 @@ post '/deploy' do
   branch = params[:branch]
   File.open('state/last_branch', 'w') { |f| f << branch }
   config = File.open('config.yml') { |f| YAML.load(f) }
-  ConfigPuller.new(config).pull(%w(config/deploy.rb Capfile), branch)
+  ConfigPuller[config['adapter'] || 'github'].new(config).pull(%w(config/deploy.rb Capfile), branch)
   pid = fork do
     DeployRunner.new(config).run
     exit

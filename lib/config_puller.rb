@@ -1,40 +1,28 @@
 require 'fileutils'
 
-class ConfigPuller
-  ConfigRequestError = Class.new(StandardError)
+module ConfigPuller
+  autoload :Github, File.join(File.dirname(__FILE__), 'config_puller', 'github')
+  autoload :Local, File.join(File.dirname(__FILE__), 'config_puller', 'local')
 
-  def initialize(config)
-    @config = config
-  end
-
-  def pull(files, branch)
-    http = Net::HTTP.new('github.com', 443)
-    http.use_ssl = true
-    files.each do |path|
-      request_path = "/#{account}/#{repository}/raw/#{branch}/#{path}?login=#{account}&token=#{token}"
-      puts request_path
-      response = http.get(request_path)
-      if response.code == '200'
-        file_path = "caproot/#{path}"
-        FileUtils.mkdir_p(File.dirname(file_path))
-        File.open(file_path, 'w') { |f| f << response.body }
-      else
-        raise ConfigRequestError, "Got response code #{response.code} when requesting #{request_path}"
-      end
+  class <<self
+    def [](name)
+      const_get(name.split("_").map { |part| part.capitalize }.join)
     end
   end
 
-  private
+  class Abstract
+    ConfigRequestError = Class.new(StandardError)
 
-  def repository
-    @config['repository']
-  end
+    def initialize(config)
+      @config = config
+    end
 
-  def account
-    @config['account']
-  end
+    private
 
-  def token
-    @config['token']
+    def write_file(path, contents)
+      file_path = File.join('caproot', path)
+      FileUtils.mkdir_p(File.dirname(file_path))
+      File.open(file_path, 'w') { |f| f << contents }
+    end
   end
 end
