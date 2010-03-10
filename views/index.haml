@@ -9,5 +9,11 @@
       %div
         Branch to deploy (e.g. 'v25'):
         %input{ :id => 'branch', :name => 'branch', :value => @branch }
+      - if @commands
+        %div
+          Type of deployment:
+          %select{ :id => 'command', :name => 'command' }
+            - @commands.each do |command, label|
+              %option{ :value => command }= label
       %div
         %input{ :type => 'submit', :value => 'Start Deploy' }

@@ -9,7 +9,8 @@ class DeployRunner
     @config = config
   end
 
-  def run
+  def run(command = nil)
+    command ||= 'deploy'
     environment = @config['environment']
     raise InProgressError if status == 'INPROGRESS'
     set_status('INPROGRESS')
@@ -17,7 +18,7 @@ class DeployRunner
     begin
       FileUtils.cd(File.join(APP_ROOT, 'caproot')) do
         FileUtils.rm(log_path) if File.exist?(log_path)
-        status = Open4.popen4(Escape.shell_command([@config['cap'], environment, 'deploy'])) do |pid, stdin, stdout, stderr|
+        status = Open4.popen4(Escape.shell_command([@config['cap'], environment, command])) do |pid, stdin, stdout, stderr|
           until stderr.eof?
             data = stderr.readline
             File.open(log_path, 'a') do |file|

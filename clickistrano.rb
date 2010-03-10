@@ -17,6 +17,8 @@ get '/' do
   if File.exist?('state/last_branch')
     @branch = IO.read('state/last_branch')
   end
+  config = File.open('config.yml') { |f| YAML.load(f) }
+  @commands = config['commands']
   haml :index
 end
 
@@ -26,7 +28,7 @@ post '/deploy' do
   config = File.open('config.yml') { |f| YAML.load(f) }
   ConfigPuller[config['adapter'] || 'github'].new(config).pull(%w(config/deploy.rb Capfile), branch)
   pid = fork do
-    DeployRunner.new(config).run
+    DeployRunner.new(config).run(params[:command])
     exit
   end
   Process.detach(pid)
